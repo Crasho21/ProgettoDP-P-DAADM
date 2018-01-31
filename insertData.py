@@ -8,14 +8,15 @@ client = MongoClient('mongodb+srv://unige:' + mongoPw + '@cluster0-gf0ua.mongodb
 db = client.provadb
 
 #Step 2: Create a collection into the DB
-db.data.delete_many({})
+#db.data.delete_many({})
 data = db.data
-prova = db.prova
+legend = db.legend
+print(data.count())
 #Creating unique attribute id
 #result = data.create_index([('id', pymongo.ASCENDING)], unique = True)
 inputData = open("DatiUCI/data.txt","r")
 id = 0
-while id < 10:
+while 1:
     line = inputData.readline()
     if len(line) == 0:
         break
@@ -23,14 +24,14 @@ while id < 10:
     flag = int(line[0])
     s = line[2 : ]
     name = s.split(" ")
-    name = name[0 : -1]
+    name = list(set(map(int, name[0 : -1])))
     #print(str(id) + " " + str(flag) + " " + str(name))
     #Catching error for duplicate entries
     try:
         temp2 = []
         for i in range(0, len(name)):
-            n = prova.find_one({'id': int(name[i])})['name']
-            temp = prova.find({'name': n}).sort("id", pymongo.ASCENDING)
+            n = legend.find_one({'id': name[i]})['name']
+            temp = legend.find({'name': n}).sort("id", pymongo.ASCENDING)
             temp = next(temp)['id']
             temp2.append(temp)
             temp2 = list(set(map(int, temp2)))

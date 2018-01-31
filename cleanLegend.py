@@ -1,4 +1,5 @@
 import pymongo
+from pymongo import MongoClient
 from pprint import pprint
 from pw import mongoPw
 
@@ -13,13 +14,14 @@ for i in range(1, count):
     try:
         first = True
         name = prova.find_one({'id': i})['name']
-        for p in prova.find({'name': name}):
+        for p in prova.find({'name': name}).sort("id", pymongo.ASCENDING):
             if not first:
-                print("Record with id " + str(p['id']) + " deleted")
+                #print("Record with id " + str(p['id']) + " deleted")
                 prova.delete_one({'id': p['id']})
             first = False
-    except:
+    except Exception as err:
         print("Record with id " + str(i) + " not found")
+        print(err)
 
 count = prova.count()
 pprint(count)

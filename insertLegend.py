@@ -1,4 +1,5 @@
 import pymongo
+from pymongo import MongoClient
 from pprint import pprint
 from pw import mongoPw
 
@@ -7,13 +8,13 @@ client = MongoClient('mongodb+srv://unige:' + mongoPw + '@cluster0-gf0ua.mongodb
 db = client.provadb
 
 #Step 2: Create a collection into the DB
-prova = db.prova
+legend = db.legend
 #Creating unique attribute id
-result = db.prova.create_index([('id', pymongo.ASCENDING)], unique = True)
-legend = open("DatiUCI/legend.txt","r")
+result = db.legend.create_index([('id', pymongo.ASCENDING)], unique = True)
+inputLegend = open("DatiUCI/legend.txt","r")
 id = 0
 while 1:
-    line = legend.readline()
+    line = inputLegend.readline()
     if len(line) == 0:
         break
     temp = line.split(" ")
@@ -31,9 +32,10 @@ while 1:
                 "name": name,
             }
         #Step 4: Insert a document
-        sample_id = prova.insert_one(p).inserted_id
-    except:
-        print("Value with id = " + str(id) + " already inserted!")
-legend.close()
-count = prova.find().count()
+        sample_id = legend.insert_one(p).inserted_id
+    except Exception as err:
+        #print("Value with id = " + str(id) + " already inserted!")
+        print(err)
+inputLegend.close()
+count = legend.find().count()
 pprint(count)
