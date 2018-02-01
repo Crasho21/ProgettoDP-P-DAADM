@@ -15,6 +15,7 @@ print(data.count())
 #Creating unique attribute id
 #result = data.create_index([('id', pymongo.ASCENDING)], unique = True)
 inputData = open("DatiUCI/data.txt","r")
+result = db.data.create_index([('id', pymongo.ASCENDING)], unique = True)
 id = 0
 while 1:
     line = inputData.readline()

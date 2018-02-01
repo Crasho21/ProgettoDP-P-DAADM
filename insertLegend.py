@@ -10,8 +10,8 @@ db = client.provadb
 #Step 2: Create a collection into the DB
 legend = db.legend
 #Creating unique attribute id
-result = db.legend.create_index([('id', pymongo.ASCENDING)], unique = True)
 inputLegend = open("DatiUCI/legend.txt","r")
+result = db.legend.create_index([('id', pymongo.ASCENDING)], unique = True)
 id = 0
 while 1:
     line = inputLegend.readline()
