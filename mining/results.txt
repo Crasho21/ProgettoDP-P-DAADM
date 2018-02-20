@@ -1,0 +1,19 @@
+Risultati
+
+Tutto
+    200
+        56/60
+    500
+        143/150
+
+Solo permessi
+    200 record  
+        56/60 corretti
+    500 record
+        137/150 corretti
+
+Solo API
+    200 record
+        57/60 corretti
+    500 record 
+        143/150
