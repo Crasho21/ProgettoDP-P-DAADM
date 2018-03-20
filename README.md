@@ -24,7 +24,7 @@
 ####
 #### A1 = android.app.Service
 ####
-#### A0 = android.app.Service-><init>
+#### A0 = android.app.Service->\<init>
 
 ## Mining:
 ### L’algoritmo utilizzato per effettuare la fase di mining si basa sui minimi quadrati regolarizzati one vs one 
