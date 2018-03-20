@@ -12,7 +12,7 @@ def search(name):
 
 # Permission and API generalization levels
 permGenLevel = 2
-apiGenLevel = 4
+apiGenLevel = 3
 
 print("Generalizing legend...\n" + time.strftime("%d/%m/%Y %H:%M:%S", time.localtime()) + "\n")
 inputData = open("DatiUCI/legend.txt", "r")
@@ -41,7 +41,7 @@ for i in range(0, 114):
         legend[i] = legend[i].split(" ")[0] + " " + legend[i].split(" ")[1] + " permission"
 
 for i in range(114, len(legend)):
-    if apiGenLevel == 4:
+    if apiGenLevel == 3:
         legend[i] = legend[i].split(" ")[0] + " " + legend[i].split(" ")[1] + " api"
     else:
 ##        print(legend[i].strip('\n'), end = ' -> ')
