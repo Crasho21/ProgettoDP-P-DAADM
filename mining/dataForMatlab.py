@@ -1,33 +1,66 @@
 import numpy
 
-dataTxt = open("DatiUCI/data.txt", "r")
-dataToMatlab = open("DatiUCI/dataToMatlab.txt", "w")
+# da matrice di numeri a matrice sparsa
 
-numFeature = 326110 + 1
+def numbersToSparse(nameTxt, nameTxtToMatlab):
+    # nameTxt = "data.txt"
+    # nameTxtToMatlab = "dataToMatlab.txt"
 
-while True:
-# for i in range(1,5):
-    line = dataTxt.readline()
-    if len(line) == 0:
-        break
-    
-    arrData = line.split(" ")
+    print("In " + nameTxt + " -> " + nameTxtToMatlab)
 
-    arrOut = numpy.zeros(numFeature, numpy.int8)  #riga di out
+    dataTxt = open("../DatiUCI/anom/" + nameTxt, "r")
+    dataToMatlab = open("..\\DatiUCI\\anom\\" + nameTxtToMatlab, "w")
 
-    arrOut[0] = int(arrData[0]) #Malware si/no
+    numFeature = 326110 + 1
 
-    # print(arrData)
-    # print(".", flush=True, end=" ")
+    while True:
+    # for i in range(1,5):
+        line = dataTxt.readline()
+        if len(line) == 0:
+            break
+        
+        arrData = line.split()
 
-    for i in range(1, len(arrData)-1):
-        index = int(arrData[i])
-        arrOut[index] = 1
+        arrOut = numpy.zeros(numFeature, numpy.int8)  #riga di out
 
-    dataToMatlab.write(" ".join(map(str, arrOut)) + "\n")
+        arrOut[0] = int(arrData[0]) #Malware si/no
 
-    
-dataTxt.close()
-dataToMatlab.close()
+        # print(arrData)
+        # print(".", flush=True, end=" ")
+
+        for i in range(1, len(arrData)):
+            index = int(arrData[i])
+            arrOut[index] = 1
+
+        dataToMatlab.write(" ".join(map(str, arrOut)) + "\n")
+
+    dataTxt.close()
+    dataToMatlab.close()
+
+    print("End " + nameTxt + " -> " + nameTxtToMatlab)
 
 
+
+arrStart = ['dataPermGenLevel0APIGenLevel1Reduced2000.txt', 
+            'dataPermGenLevel0APIGenLevel2Reduced2000.txt',
+            'dataPermGenLevel0APIGenLevel3Reduced2000.txt', 
+            'dataPermGenLevel1APIGenLevel1Reduced2000.txt',
+            'dataPermGenLevel1APIGenLevel2Reduced2000.txt', 
+            'dataPermGenLevel1APIGenLevel3Reduced2000.txt',
+            'dataPermGenLevel2APIGenLevel1Reduced2000.txt', 
+            'dataPermGenLevel2APIGenLevel2Reduced2000.txt', 
+            'dataPermGenLevel2APIGenLevel3Reduced2000.txt']
+
+arrEnd = ['dataPermGenLevel0APIGenLevel1Reduced2000_sparse.txt', 
+          'dataPermGenLevel0APIGenLevel2Reduced2000_sparse.txt',
+          'dataPermGenLevel0APIGenLevel3Reduced2000_sparse.txt', 
+          'dataPermGenLevel1APIGenLevel1Reduced2000_sparse.txt',
+          'dataPermGenLevel1APIGenLevel2Reduced2000_sparse.txt', 
+          'dataPermGenLevel1APIGenLevel3Reduced2000_sparse.txt',
+          'dataPermGenLevel2APIGenLevel1Reduced2000_sparse.txt', 
+          'dataPermGenLevel2APIGenLevel2Reduced2000_sparse.txt', 
+          'dataPermGenLevel2APIGenLevel3Reduced2000_sparse.txt']
+
+
+for i in range(0, len(arrStart)):
+    numbersToSparse(arrStart[i], arrEnd[i])

@@ -1,7 +1,7 @@
 dataToMatlab = open("../DatiUCI/data.txt", "r")
-dataReduced = open("../DatiUCI/data5000.txt", "w")
+dataReduced = open("../DatiUCI/data2000.txt", "w")
 
-n = 2500
+n = 1000
 
 # for i in range(1,5):
 for i in range(0,n):
